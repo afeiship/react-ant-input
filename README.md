@@ -12,11 +12,13 @@ npm update @feizheng/react-ant-input
 ```
 
 ## properties
-| Name      | Type   | Default | Description                           |
-| --------- | ------ | ------- | ------------------------------------- |
-| className | string | -       | The extended className for component. |
-| value     | object | null    | Default value.                        |
-| onChange  | func   | noop    | The change handler.                   |
+| Name         | Type   | Default | Description                                  |
+| ------------ | ------ | ------- | -------------------------------------------- |
+| className    | string | -       | The extended className for component.        |
+| value        | any    | -       | Default value.                               |
+| shouldTrim   | bool   | false   | If the value should be trim before returned. |
+| autoComplete | string | 'off'   |
+| onChange     | func   | noop    | The change handler.                          |
 
 
 ## usage
@@ -35,11 +37,34 @@ npm update @feizheng/react-ant-input
   import './assets/style.scss';
 
   class App extends React.Component {
-    componentDidMount() {}
+    state = {
+      value: '',
+      value2: ''
+    };
+
+    handleChange = (inEvent) => {
+      this.setState({
+        [inEvent.target.name]: inEvent.target.value
+      });
+    };
+
     render() {
+      const { value, value2 } = this.state;
+
       return (
         <div className="app-container">
-          <ReactAntInput />
+          <ReactAntInput
+            name="value"
+            value={value}
+            onChange={this.handleChange}
+          />
+
+          <ReactAntInput
+            shouldTrim
+            name="value2"
+            value={value2}
+            onChange={this.handleChange}
+          />
         </div>
       );
     }
@@ -51,16 +76,3 @@ npm update @feizheng/react-ant-input
 
 ## documentation
 - https://afeiship.github.io/react-ant-input/
-
-## resources
-- https://www.robinwieruch.de/minimal-react-webpack-babel-setup/
-- https://www.valentinog.com/blog/react-webpack-babel/
-- https://jestjs.io/docs/en/tutorial-react#snapshot-testing-with-mocks-enzyme-and-react-16
-- https://testing-library.com/docs/react-testing-library/api
-
-## todos
-- [ ] Add: semver number for every build files.
-- [ ] Add: need output css files.
-- [ ] Add: PWA support for docs.
-- [ ] Add: source.map file for dist(`you can upload for production debug`).
-- [ ] BUG: npm run dev will clean dist.
