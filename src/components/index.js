@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import noop from '@feizheng/noop';
-import objectAssign from 'object-assign';
+import noop from '@jswork/noop';
 import { Input } from 'antd';
 
 const CLASS_NAME = 'react-ant-input';
@@ -24,10 +22,14 @@ export default class ReactAntInput extends Component {
      * If the value should be trim before returned.
      */
     shouldTrim: PropTypes.bool,
+    /**
+     * Should autoComplete on.
+     */
     autoComplete: PropTypes.string,
     /**
      * The change handler.
-     */ onChange: PropTypes.func
+     */
+    onChange: PropTypes.func
   };
 
   static defaultProps = {
